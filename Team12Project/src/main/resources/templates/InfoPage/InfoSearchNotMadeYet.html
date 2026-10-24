@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf?.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}"/>
+    <title>Generate Roadmap</title>
+
+    <style>
+        /* --- Import Font (Optional, looks better) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        /* --- Global Reset & Body (LIGHT MODE) --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8fafc; /* Light background */
+            color: #1e293b; /* Dark text for contrast */
+            overflow-x: hidden;
+        }
+
+        /* * NOTE: Your existing navbar CSS uses dark variables:
+         * --nav-bg: #0f172a;
+         * This means the sidebar will remain dark, creating a high-contrast design.
+         * If you want a light navbar, those CSS variables would need to be updated.
+         */
+
+        /* --- Main Layout Wrapper --- */
+        .main-content {
+            margin-left: 230px; /* Width of your dark navbar */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            background-color: #ffffff; /* Pure white background */
+            /* Removed dark gradient */
+        }
+
+        /* --- Empty State Card --- */
+        .empty-state-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 3rem;
+            background: #ffffff; /* White card */
+            border: 1px solid #e2e8f0; /* Light border */
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #2563eb, #3b82f6); /* Blue gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.sub-text {
+            color: #64748b; /* Muted dark text */
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        /* --- Generate Button Styles (No change needed, blue is universal) --- */
+        .generate-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+        /* --- Loading State & Spinner (Adjusted colors for light mode background) --- */
+        .generate-btn.loading {
+            background: #e2e8f0; /* Light gray loading background */
+            color: #64748b;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Spinner color contrast adjustment */
+        .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(100, 116, 139, 0.3); /* Gray border */
+            border-radius: 50%;
+            border-top-color: #2563eb; /* Blue top for visibility */
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .generate-btn.loading .spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive adjustment */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar('goal-roadmap')"></div>
+
+<div class="main-content">
+    <div class="empty-state-container">
+        <svg style="width: 64px; height: 64px; color: #3b82f6; margin-bottom: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+
+        <h1>Ready to start?</h1>
+        <p class="sub-text">Your info page hasn't been generated yet. Click the button below to analyze your data and create your personalized help page!</p>
+
+        <button id="genButton" class="generate-btn">
+            <span class="spinner"></span>
+            <span class="btn-text">Generate Info Page</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('genButton').addEventListener('click', function() {
+        const button = this;
+        const btnText = button.querySelector('.btn-text');
+
+        // 1. Add loading state styling
+        button.classList.add('loading');
+        btnText.textContent = "Generating...";
+        button.disabled = true;
+
+        // --- CSRF Token Setup ---
+        const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+
+        const headers = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        };
+        if (csrfToken && csrfHeader) {
+            headers[csrfHeader] = csrfToken;
+        }
+
+        // 2. Call the Spring Boot Endpoint
+        fetch('/infoSearchGen', {
+            method: 'POST',
+            headers: headers
+        })
+            .then(response => {
+                // Check if request was successful (200-299) OR if it was a redirect (302)
+                if (response.ok || response.redirected) {
+                    console.log("Processing complete. Redirecting...");
+
+                    // --- FIX: Manually force the browser to go to the page ---
+                    window.location.href = "/infoSearch";
+                } else {
+                    throw new Error(`Server returned status: ${response.status}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error during generation:', error);
+                // 3. Error: Remove loading state so user can try again
+                button.classList.remove('loading');
+                btnText.textContent = "Generate Info Page";
+                button.disabled = false;
+                alert("An error occurred during generation. Please check the console.");
+            });
+    });
+</script>
+</body>
+</html>

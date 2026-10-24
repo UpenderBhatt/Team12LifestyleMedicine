@@ -1,0 +1,330 @@
+.goal-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.goal-header h1 {
+    margin-bottom: 0.25rem;
+    font-size: 2rem;
+    color: var(--primary-dark);
+}
+
+.daily-goal {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.test-controls {
+    margin: 1.25rem 0 0;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.small-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+}
+
+.goal-roadmap-page .main-content .container {
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.roadmap-section {
+    margin-top: 1.75rem;
+}
+
+.roadmap-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.roadmap-row {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.roadmap-header-row .roadmap-day {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.roadmap-cell {
+    background: #ffffff;
+    border: 1px solid #dde1e7;
+    border-radius: 10px;
+    padding: 1.1rem;
+    min-height: 140px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.roadmap-cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border-color: var(--primary-color);
+}
+
+.task-content {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.task-title {
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.cell-today {
+    border: 2px solid var(--primary-color);
+    background-color: #f0f8ff;
+}
+
+.cell-complete {
+    background-color: var(--accent-light);
+    border-color: var(--accent-color);
+}
+
+.cell-past-incomplete {
+    background-color: #fef2f2;
+    border-color: #fca5a5;
+    opacity: 0.95;
+}
+
+.roadmap-cell::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 1.2rem;
+}
+
+.cell-complete::after {
+    content: "✔";
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.cell-past-incomplete::after {
+    content: "✖";
+    color: #e53935;
+    font-weight: 700;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    margin: 8% auto;
+    padding: 1.5rem 1.75rem 1.25rem;
+    width: 90%;
+    max-width: 520px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+}
+
+.close-btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0;
+    width: auto;
+    height: auto;
+}
+
+.close-btn:hover {
+    background: transparent !important;
+    color: var(--primary-dark);
+}
+
+#modalGoalDesc {
+    margin: 0 0 0.75rem;
+    color: var(--text-main);
+}
+
+.reflection-section {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.checkbox-container input[type="checkbox"]{
+    width: auto;
+    height: auto;
+    margin: 0;
+    transform: translateY(1px);
+}
+
+#completeCheckbox {
+    width: auto;
+}
+
+#reflectionText {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    resize: vertical;
+    min-height: 110px;
+    font-size: 0.95rem;
+}
+
+.modal-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.save-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .roadmap-row {
+        grid-template-columns: 1fr;
+    }
+
+    .roadmap-header-row {
+        display: none;
+    }
+
+    .roadmap-cell {
+        min-height: 90px;
+    }
+
+    .test-controls {
+        justify-content: center;
+    }
+
+    .modal-content {
+        margin-top: 20%;
+        padding: 1.25rem 1.25rem 1rem;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .save-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .roadmap-section {
+        margin-top: 2rem;
+    }
+
+    .roadmap-cell {
+        min-height: 130px;
+    }
+}
+
+/*streaks*/
+
+/* Streak pill is positioned to the left, like the Figma */
+.streak-banner {
+    position: absolute;
+    top: 50%;
+    left: 15%;               /* tweak this % to match your mockup */
+    transform: translate(-50%, -50%);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 8px 18px;
+    background: #ffffff;
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-size: 18px;
+    font-weight: 600;
+    color: #1d3557;
+}
+
+.streak-icon {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.streak-text {
+    line-height: 1.2;
+}
+
+header {
+    text-align: center;
+}
+
+/* Container for streak pill + buttons */
+.controls-row {
+    position: relative;
+    text-align: center;      /* centre the buttons block */
+    margin-top: 24px;
+    margin-bottom: 32px;
+}
+
+/* Buttons stay centred under the subtitle */
+.test-controls {
+    display: inline-flex;
+    gap: 12px;
+}
+

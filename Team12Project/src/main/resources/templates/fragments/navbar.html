@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div th:fragment="navbar(activePage)">
+
+    <button class="navbar-toggle" type="button" onclick="toggleNavbar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <link th:href="@{/styles/css/lifestyleWeb.css}" rel="stylesheet">
+    <link th:href="@{/styles/css/navbar.css}" rel="stylesheet">
+
+
+    <nav class="navbar" id="sidebar">
+        <ul class="nav-left">
+            <li sec:authorize="hasRole('ROLE_PATIENT')" th:classappend="${activePage} == 'profile' ? ' active'"><a th:href="@{/profile}">Profile</a></li>
+            <li sec:authorize="hasRole('ROLE_PATIENT')" th:classappend="${activePage} == 'information' ? ' active'"><a th:href="@{/infoSearch}">Information</a></li>
+            <li sec:authorize="hasRole('ROLE_PATIENT')" th:classappend="${activePage} == 'goal-roadmap' ? ' active'"><a th:href="@{/}">Goal Roadmap</a></li>
+            <li sec:authorize="hasRole('ROLE_CLINICIAN')" th:classappend="${activePage} == 'appointments' ? ' active'"><a th:href="@{/appointments}">Appointments</a></li>
+            <li sec:authorize="hasRole('ROLE_CLINICIAN')" th:classappend="${activePage} == 'patient-profiles' ? ' active'"><a th:href="@{/clinician/users}">Patient Profiles</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')" th:classappend="${activePage} == 'reminders' ? ' active'"><a th:href="@{/admin/reminders}">Reminders</a></li>
+        </ul>
+        <ul class="nav-right">
+            <form th:action="@{/logout}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit">Logout</button>
+            </form>
+        </ul>
+    </nav>
+
+    <script>
+        function toggleNavbar(){
+            document.body.classList.toggle('sidebar-collapsed');
+        }
+    </script>
+</div>
+</body>
+</html>
+

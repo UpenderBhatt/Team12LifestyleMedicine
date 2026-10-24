@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Health & Fitness Info</title>
+    <link rel="stylesheet" th:href="@{/styles/css/lifestyleWeb.css}">
+    <link th:href="@{/styles/css/InfoPageStyle.css}" rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="fragments/navbar :: navbar('information')"></div>
+<div class="main-content">
+    <div th:utext="${infoPageInfo.getHtmlContent()}"></div>
+</div>
+
+</body>
+
+
+</html>

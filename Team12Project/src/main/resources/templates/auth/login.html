@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="English">
+<head>
+    <title>Login</title>
+    <link th:href="@{/styles/css/lifestyleWeb.css}" rel="stylesheet">
+    <link th:href="@{/styles/css/LoginRegister.css}" rel="stylesheet">
+</head>
+
+<body class="auth-body">
+
+<div class="auth-card">
+    <h2>Welcome Back!</h2>
+    <h3 class="success" th:if="${param.success}">You are registered successfully!</h3>
+
+    <form class="auth-form" th:action="@{/login}" th:object="${user}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" th:field="*{username}" id="username" />
+
+        <label for="password">Password:</label>
+        <input type="password" th:field="*{password}" id="password" />
+
+        <button class="auth-submit" type="submit">Login</button>
+    </form>
+
+    <a class="auth-link" href="/register" style="text-align: center;">Dont have an account? Click here to Register!</a>
+
+    <p class="message" th:if="${param.error}" style="color: #d32f2f; text-align: center;">
+        Invalid username or password. Please try again.
+    </p>
+
+</div>
+</body>
+</html>

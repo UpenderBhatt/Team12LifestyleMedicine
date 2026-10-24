@@ -1,0 +1,136 @@
+h1 {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+p strong {
+    color: var(--primary-dark);
+    display: inline-block;
+    width: 120px;
+}
+
+.users-page .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+}
+
+.users-container {
+    width: 100%;
+}
+
+.page-header {
+    margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+    margin: 0 0 0.25rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+}
+
+.page-subtitle {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.table-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.users-page .users-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: auto;
+    margin-top: 0;
+    background: transparent;
+    border-radius: 0;
+}
+
+.users-page .users-table thead {
+    background-color: #e8f1ff;
+}
+
+.users-page .users-table thead th {
+    background-color: #e8f1ff;
+    border-bottom: 1px solid #d3def5;
+    border-top: none;
+    padding-top: 0.85rem;
+}
+
+.users-page .users-table th,
+.users-page .users-table td {
+    padding: 0.9rem 1.1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e6ef;
+    font-size: 0.95rem;
+}
+
+.users-page .users-table th {
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.users-page .users-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.actions-col {
+    width: 260px;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.view-link {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.user-actions .view-link {
+    margin-right: 0.25rem;
+}
+
+.view-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.download-btn {
+    padding: 0.45rem 1.1rem;
+    font-size: 0.9rem;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.download-btn:hover {
+    background-color: #00796b;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .users-page .main-content {
+        padding: 1.75rem 1rem;
+    }
+
+    .table-card {
+        overflow-x: auto;
+    }
+
+    .users-page .users-table {
+        min-width: 600px;
+    }
+}

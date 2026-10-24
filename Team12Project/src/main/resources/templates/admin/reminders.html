@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Reminders</title>
+    <link rel="stylesheet" th:href="@{/styles/css/lifestyleWeb.css}">
+</head>
+
+<body class="reminders">
+
+<div th:replace="fragments/navbar :: navbar('reminders')"></div>
+
+<div class="main-content">
+
+    <div class="container">
+
+        <div class="row">
+        <span class="date-box">
+            Current Date:
+            <span th:text="${#temporals.format(currentDate, 'dd/MM/yyyy')}"></span>
+        </span>
+
+            <form th:action="@{/admin/reminders/next-day}" method="post" style="display:inline;">
+                <button type="submit">Next Day</button>
+            </form>
+        </div>
+
+        <form th:action="@{/admin/reminders/send-reminders}" method="post">
+            <button type="submit" class="full-width">
+                Send task reminder emails
+            </button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

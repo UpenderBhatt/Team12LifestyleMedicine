@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Patient Profile - ' + ${user.username}">Patient Profile</title>
+    <link th:href="@{/styles/css/profile.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar('patient-profiles')"></div>
+
+<div class="main-content">
+    <div class="profile-page">
+        <div class="profile-card">
+
+            <div class="profile-header">
+                <div class="profile-picture">
+                    <img th:src="@{/IMGs/profile-picture.jpg}" alt="profile picture"/>
+                </div>
+
+                <div class="profile-main-title">
+                    <h1>Personal Risk Profile</h1>
+
+                    <p>
+                        <strong>Username</strong>
+                        <span th:text="${user.username}">Username</span>
+                    </p>
+
+                    <p>
+                        <strong>Email</strong>
+                        <span th:text="${user.email}">Email</span>
+                    </p>
+
+                    <p>
+                        <strong>Address</strong>
+                        123 coronation street
+                    </p>
+
+                    <p>
+                        <strong>Telephone Number</strong>
+                        12345 667890
+                    </p>
+                </div>
+            </div>
+
+            <div class="goal-box">
+                <h3>Today's Task</h3>
+                <p th:text="${profile.todaysTask}">Placeholder task text.</p>
+            </div>
+
+            <div class="responses-box">
+
+                <p>What is your gender? —
+                    <span th:text="${profile.gender}"></span></p>
+
+                <p>What is your age? —
+                    <span th:text="${profile.age}"></span></p>
+
+                <p>BMI? —
+                    <span th:text="${profile.bmi}"></span></p>
+
+                <p>What are your health conditions? —
+                    <span th:text="${profile.healthConditions}"></span></p>
+
+                <p>How many fruit/vegetables do you eat daily? —
+                    <span th:text="${profile.fruitVegServings}"></span></p>
+
+                <p>How many hours of sleep do you get per night? —
+                    <span th:text="${profile.sleepHours}"></span></p>
+
+                <p>How often do you feel stressed? —
+                    <span th:text="${profile.stressFrequency}"></span></p>
+
+                <p>Which level of experience would you say you have when it comes to exercise? —
+                    <span th:text="${profile.exerciseFrequency}"></span></p>
+
+                <p>Do you smoke cigarettes? —
+                    <span th:text="${profile.smokingStatus}"></span></p>
+
+                <p>Do you drink alcohol? —
+                    <span th:text="${profile.alcoholUse}"></span></p>
+
+                <p>What do you want to achieve? —
+                    <span th:text="${profile.goal}"></span></p>
+
+                <p>Why do you want to achieve this? —
+                    <span th:text="${profile.goalReason}"></span></p>
+
+                <p>On a scale of 1–10, how confident are you in making lifestyle changes? —
+                    <span th:text="${profile.lifestyleConfidence}"></span></p>
+
+                <p>On a scale of 1–10, how ready are you to make changes now? —
+                    <span th:text="${profile.readinessToChange}"></span></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

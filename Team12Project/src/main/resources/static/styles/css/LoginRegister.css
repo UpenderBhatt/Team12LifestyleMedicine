@@ -1,0 +1,116 @@
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: var(--bg-body);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.auth-card h2 {
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+}
+
+.success {
+    color: #388e3c;
+    margin-bottom: 1rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.auth-form label {
+    align-self: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 320px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.auth-form input {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.auth-submit {
+    margin-top: 0.75rem;
+    padding: 0.9rem 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    min-width: 180px;
+}
+
+.auth-submit:hover {
+    background-color: var(--primary-dark);
+}
+
+.message {
+    margin-top: 1rem;
+    padding: 10px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    color: #d32f2f;
+    text-align: center;
+}
+
+.auth-link {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 1.75rem;
+    }
+
+    .auth-form label,
+    .auth-form input,
+    .auth-submit {
+        max-width: 100%;
+    }
+
+    .auth-submit {
+        width: 100%;
+    }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Goal Roadmap</title>
+    <link th:href="@{/styles/css/lifestyleWeb.css}" rel="stylesheet">
+    <link th:href="@{/styles/css/goal-roadmap.css}" rel="stylesheet">
+</head>
+
+<body class="goal-roadmap-page" th:attr="data-user-id=${userId}">
+<div th:replace="fragments/navbar :: navbar('goal-roadmap')"></div>
+<div class="main-content">
+
+
+    <div class="container">
+
+        <header class="goal-header">
+            <h1>Goal Roadmap</h1>
+            <p class="daily-goal">Track your goal for each day.</p>
+
+            <div class="controls-row">
+
+                <!--Streaks Banner-->
+                <div class="streak-banner">
+                    <span class="streak-icon">🔥</span>
+                    <span class="streak-text" th:text="${currentStreak} + ' Day Streak'">0 Day Streak</span>
+                </div>
+
+                <div class="test-controls">
+                    <button id="prevDayBtn" class="btn small-btn">Previous Day</button>
+                    <button id="nextDayBtn" class="btn small-btn">Next Day</button>
+                </div>
+
+            </div>
+   
+        </header>
+
+
+        <section class="roadmap-section">
+
+
+
+            <div class="roadmap-grid">
+
+                <div class="roadmap-row roadmap-header-row">
+                    <div class="roadmap-day">Mon</div>
+                    <div class="roadmap-day">Tue</div>
+                    <div class="roadmap-day">Wed</div>
+                    <div class="roadmap-day">Thu</div>
+                    <div class="roadmap-day">Fri</div>
+                    <div class="roadmap-day">Sat</div>
+                    <div class="roadmap-day">Sun</div>
+                </div>
+
+                <div th:each="week : ${weeks}" class="roadmap-row">
+
+                    <div class="roadmap-cell"
+                         th:each="task : ${week}"
+                         th:data-task-id="${task.taskId}"
+                         th:data-task-date="${task.taskDate}"
+                         th:data-task-title="${task.taskTitle}"
+                         th:data-task-desc="${task.taskDescription}"
+
+                         th:classappend="
+        ${task.taskDate.isEqual(todayDate)} ?
+            ' cell-today' :
+
+        (${task.taskDate.isBefore(todayDate)} ?
+            (
+                ${task.status.name() == 'Completed'} ?
+                    ' cell-complete' :
+                    ' cell-past-incomplete'
+            )
+            :
+            ' cell-future'
+        )
+    ">
+
+
+                    <div class="task-content">
+                            <span class="task-title" th:text="${task.taskTitle}"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <div id="reflectionModal" class="modal">
+        <div class="modal-content animate">
+
+            <div class="modal-header">
+                <h3 id="modalTitle">Goal</h3>
+                <button id="closeReflectionModal" class="close-btn" aria-label="Close">&times;</button>
+            </div>
+
+            <p id="modalGoalDesc">Desc</p>
+
+            <div class="reflection-section">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="completeCheckbox">
+                    Mark as complete
+                </label>
+
+                <textarea id="reflectionText" rows="4"
+                          placeholder="Write reflection..."
+                          class="hidden"></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button id="saveReflectionBtn" class="btn save-btn hidden">Save Reflection</button>
+                <button id="editReflectionBtn" class="btn save-btn hidden">Edit Reflection</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script th:src="@{/styles/js/goal-roadmap.js}"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Users</title>
+    <link rel="stylesheet" th:href="@{/styles/css/lifestyleWeb.css}">
+    <link th:href="@{/styles/css/user-profile.css}" rel="stylesheet">
+</head>
+
+<body class="users-page">
+
+<div th:replace="fragments/navbar :: navbar('patient-profiles')"></div>
+
+<div class="main-content">
+    <div class="users-container">
+        <div class="page-header">
+            <h1>Registered Users</h1>
+            <p class="page-subtitle">View and download patient profiles.</p>
+        </div>
+
+        <div class="table-card">
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th class="actions-col">Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td class="user-actions">
+                        <a class="view-link" th:href="@{'/clinician/users/' + ${user.id}}">View Profile</a>
+                        <a class="btn download-btn" th:href="@{'/clinician/users/' + ${user.id} + '/download'}">Download Profile</a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
